@@ -1,0 +1,458 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Choose Your Favourite Cake</title>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap">
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+</head>
+
+
+<body>
+
+
+<!--  HEADER  -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <div class="logo-cake">
+            🎂
+        </div>
+
+        <div class="logo-writing">
+
+            <h2>
+                Crust &amp; Crumbs
+            </h2>
+
+            <p>
+                Freshly Baked. Always Special.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <nav class="navbar">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/#about">
+            About
+        </a>
+
+        <a href="{% url 'cakes' %}">
+            Cakes
+        </a>
+
+        <a href="/#contact">
+            Contact
+        </a>
+
+    </nav>
+
+
+    <div class="header-right">
+
+        <button class="header-icon"
+                id="searchBtn">
+
+            🔍
+
+        </button>
+
+
+        <button class="cart-button"
+                id="cartBtn">
+
+            🛒
+
+            <span class="cart-count"
+                  id="cartCount">
+
+                0
+
+            </span>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!--  CAKE COLLECTION -->
+
+<section class="cake-collection cakes-page"
+         id="cakeCollection">
+
+
+    <div class="cake-collection-title">
+
+        <h2>
+            Choose Your Favourite Cake
+        </h2>
+
+        <p>
+            Select your favourite flavour and choose your cake.
+        </p>
+
+    </div>
+
+
+
+    <!-- FLAVOUR BUTTONS  -->
+
+    <div class="filter-buttons">
+
+        <button class="filter-button active"
+                data-filter="all">
+
+            All
+
+        </button>
+
+
+        <button class="filter-button"
+                data-filter="Chocolate">
+
+            Chocolate
+
+        </button>
+
+
+        <button class="filter-button"
+                data-filter="Butterscotch">
+
+            Butterscotch
+
+        </button>
+
+
+        <button class="filter-button"
+                data-filter="Red Velvet">
+
+            Red Velvet
+
+        </button>
+
+
+        <button class="filter-button"
+                data-filter="Strawberry">
+
+            Strawberry
+
+        </button>
+
+
+        <button class="filter-button"
+                data-filter="Black Forest">
+
+            Black Forest
+
+        </button>
+
+
+        <button class="filter-button"
+                data-filter="Pineapple">
+
+            Pineapple
+
+        </button>
+
+
+        <button class="filter-button"
+                data-filter="Designer">
+
+            Designer
+
+        </button>
+
+
+        <button class="filter-button"
+                data-filter="Customize">
+
+            Customize
+
+        </button>
+
+    </div>
+
+
+
+    <!-- CAKE CARDS -->
+
+    <div class="cake-container">
+
+        {% for cake in cakes %}
+
+        <div class="cake-card"
+             data-flavour="{{ cake.flavour }}">
+
+
+            <div class="cake-image">
+
+            <img src="{{ cake.image.url }}"
+                     alt="{{ cake.name }}">
+
+            </div>
+
+
+            <h3>
+                {{ cake.name }}
+            </h3>
+
+
+
+            <!--  VIEW PRICES  -->
+
+            <button class="price-toggle">
+
+                View Prices ▼
+
+            </button>
+
+
+
+            <div class="price-dropdown">
+
+
+                <!-- 0.5 KG -->
+
+                <div class="price-option">
+
+                    <label>
+
+                        <input type="radio"
+                               name="kg_{{ cake.id }}"
+                               value="0.5"
+                               data-price="{{ cake.price_05kg }}">
+
+                        0.5 KG
+
+                    </label>
+
+
+                    <span class="price-value">
+
+                        ₹{{ cake.price_05kg }}
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- 1 KG -->
+
+                <div class="price-option">
+
+                    <label>
+
+                        <input type="radio"
+                               name="kg_{{ cake.id }}"
+                               value="1"
+                               data-price="{{ cake.price_1kg }}">
+
+                        1 KG
+
+                    </label>
+
+
+                    <span class="price-value">
+
+                        ₹{{ cake.price_1kg }}
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- 1.5 KG -->
+
+                <div class="price-option">
+
+                    <label>
+
+                        <input type="radio"
+                               name="kg_{{ cake.id }}"
+                               value="15"
+                               data-price="{{ cake.price_15kg }}">
+
+                        1.5 KG
+
+                    </label>
+
+
+                    <span class="price-value">
+
+                        ₹{{ cake.price_1.5kg }}
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- 2 KG -->
+
+                <div class="price-option">
+
+                    <label>
+
+                        <input type="radio"
+                               name="kg_{{ cake.id }}"
+                               value="2"
+                               data-price="{{ cake.price_2kg }}">
+
+                        2 KG
+
+                    </label>
+
+
+                    <span class="price-value">
+
+                        ₹{{ cake.price_2kg }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BOOK  -->
+
+            <button class="book-button"
+                    onclick="bookCake('{{ cake.name|escapejs }}', '{{ cake.flavour|escapejs }}', {{ cake.id }})">
+
+                Book This Cake
+
+            </button>
+
+
+        </div>
+
+
+        {% empty %}
+
+        <p>
+            No cakes available.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+
+<!--  CART PANEL  -->
+
+<div class="cart-panel"
+     id="cartPanel">
+
+
+    <div class="cart-box">
+
+
+        <button class="close-cart"
+                id="closeCart">
+
+            ×
+
+        </button>
+
+
+        <h2>
+            Your Cart
+        </h2>
+
+
+        <div id="cartItems"></div>
+
+
+
+        <!--  CUSTOMER DETAILS  -->
+
+        <div class="customer-form">
+
+
+            <h3>
+                Customer Details
+            </h3>
+
+
+            <label>
+                Name
+            </label>
+
+            <input type="text"
+                   id="customerName"
+                   placeholder="Enter your name">
+
+
+
+            <label>
+                Address
+            </label>
+
+            <textarea id="customerAddress"
+                      placeholder="Enter your address"></textarea>
+
+
+
+            <label>
+                Phone Number
+            </label>
+
+            <input type="tel"
+                   id="customerPhone"
+                   placeholder="Enter your phone number">
+
+
+
+            <button id="submitOrder">
+
+                Place Order
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- JAVASCRIPT  -->
+
+<script src="{% static 'js/script.js' %}"></script>
+
+
+</body>
+
+</html>
